@@ -27,6 +27,27 @@ sys_wait(void)
 }
 
 int
+sys_wait_stat(void){
+    int wtime;
+    int rtime;
+    int iotime;
+    int status;
+    if(argint(0,&wtime) < 0){
+        return -1;
+    }
+    if(argint(1,&rtime) < 0){
+        return -1;
+    }
+    if(argint(2,&iotime) < 0){
+        return -1;
+    }
+    if(argint(3,&status) < 0){
+        return -1;
+    }
+    return wait_stat((int*)wtime, (int*)rtime, (int*) iotime, (int*) status);
+}
+
+int
 sys_kill(void)
 {
   int pid;

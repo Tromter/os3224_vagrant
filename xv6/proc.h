@@ -51,6 +51,8 @@ struct context {
 
 enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };
 
+//int wait_stat(int *wtime, int *rtime, int *iotime, int* status);
+
 // Per-process state
 struct proc {
   uint sz;                     // Size of process memory (bytes)
@@ -66,6 +68,12 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
+    uint ctime; //process creation time; after the creation of a new process, kernel will update process' creating time...
+    int ttime; //termination time
+    int stime;  //SLEEPING time duration (only when waiting for I/O)
+    int retime; //READY time duration
+    int rutime;  //RUNNING time duration
+    
 };
 
 // Process memory is laid out contiguously, low addresses first:
